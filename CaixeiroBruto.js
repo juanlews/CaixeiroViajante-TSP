@@ -14,7 +14,7 @@ var minCost = 0;
 var indMinCost;
 
 try {
-  const data = fs.readFileSync('grafo.txt', 'utf8');
+  const data = fs.readFileSync('grafo4x80.txt', 'utf8');
   let text = (data.split(',').map(element => Number(element.trim())));
   nbNodes = Number(text[0]);
   text.shift();
@@ -69,20 +69,23 @@ function initialize(nbN){
 //=======================================================================================
 function calculateCosts(nbN){
   costs = new Array();
-
+  path = {};
   for (var i = 0; i < comb.length ; i++) {
     costs[i] = matrix_costs[0][comb[i][0]];
-
     for (var j = 1; j < nbN-1; j++) {
       costs[i] += matrix_costs[comb[i][j-1]][comb[i][j]];
     }
+    path[i]={}
+    path[i].caminho = matrix_costs[comb[i][nbN-2]];
     costs[i] += matrix_costs[comb[i][nbN-2]][0];
+    path[i].custo = costs[i];
   }
+  console.log('custo->', matrix_costs, 'path -> ',path, 'comb -> ',comb, );
 }
 
 //=======================================================================================
 function minCosts() {
-  indMinCost = 0 ;
+  indMinCost = 0;
   minCost = costs[0];
   for (var i = 0; i < costs.length; i++) {
     if (costs[i] < minCost) {
@@ -95,17 +98,17 @@ function minCosts() {
 //=======================================================================================
 function resolveExponential() {
   var t0 = performance.now();
+  console.time("Execução");
 
   if (matrix_costs.length == 0 || nbNodes == 0) alert("number nodes = 0, or matrix_costs empty");
   else {
     initialize(nbNodes);
     calculateCosts(nbNodes);
     minCosts();
+    console.log("Custo Minimo : ");
     console.log(minCost);
-    console.log(indMinCost);
     console.log("exp"+(performance.now()-t0));
   }
 }
-console.time("Execução");
 resolveExponential();
 console.timeEnd("Execução");

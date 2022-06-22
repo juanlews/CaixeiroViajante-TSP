@@ -1,11 +1,12 @@
 //Código base: https://www.geeksforgeeks.org/travelling-salesman-problem-greedy-approach/
-
 class TSPGreedy
 {
     // Function to find the minimum
     // cost path for all the paths
     static findMinRoute(tsp)
     {
+        var t0 = performance.now();
+
         var sum = 0;
         var counter = 0;
         var j = 0;
@@ -63,16 +64,18 @@ class TSPGreedy
         sum += min;
         // Started from the node where
         // we finished as well.
-        console.log("Minimum Cost is : ");
+        console.log("Custo Minimo : ");
         console.log(sum);
+        console.log("exp"+(performance.now()-t0));
     }
 
     // Driver Code
     static main(args)
     {
         // Input Matrix
-        var tsp = [[-1, 10, 15, 20], [10, -1, 35, 25], [15, 35, -1, 30], [20, 25, 30, -1]];
+        var tsp = [[0, 10, 15, 20,], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]];
         // Function Call
+        console.log('\nUsando o seguinte grafo:\n', tsp);
         console.time("Execução");
         TSPGreedy.findMinRoute(tsp);
         console.timeEnd("Execução");

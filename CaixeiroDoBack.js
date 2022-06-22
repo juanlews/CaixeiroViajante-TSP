@@ -44,16 +44,11 @@ function tsp(graph, currPos, n, count, cost)
 // Driver code
 // n is the number of nodes i.e. V
 var n = 4;
-var graph = [
-    [ 0, 10, 15, 20 ],
-    [ 10, 0, 35, 25 ],
-    [ 15, 35, 0, 30 ],
-    [ 20, 25, 30, 0 ],
-];
+var graph = [ [0, 10, 15, 20,], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
 
 //leitura do arquivo com o grafo
 try {
-  const data = fs.readFileSync('grafo2.txt', 'utf8');
+  const data = fs.readFileSync('gafo2.txt', 'utf8');
   let text = (data.split(',').map(element => Number(element.trim())));
   n = Number(text[0]);
   text.shift();
@@ -63,7 +58,7 @@ try {
   text.forEach((item) => {
     tempArray.push(item);
     counter++
-    if(counter == 4){
+    if(counter == n){
       graph.push(tempArray);
       tempArray = [];
       counter = 0
