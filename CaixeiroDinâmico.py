@@ -69,4 +69,15 @@ def held_karp(dists):
 
 graph = [[0, 10, 15, 20,], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
 
-print(held_karp(graph))
+from datetime import datetime
+start_time = datetime.now()
+min_cost, better_path = held_karp(graph)
+print()
+end_time = datetime.now()
+time_diff = (end_time - start_time)
+execution_time = time_diff.total_seconds() * 1000
+print("Usando o seguinte grafo:\n");
+print(graph)
+print("\n")
+print("Custo Minimo %s" % min_cost);
+print("Execução: %s ms" % execution_time);
